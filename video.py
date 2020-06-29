@@ -22,10 +22,10 @@ flags.DEFINE_integer('num_gpu', 1,
                      'Number of GPUs to use.')
 
 model_dir = './model'
-image_size = (1080, 720)
+image_size = (540, 360)
 data_dir = './images'
 
-sess = tf.Session()
+sess = tf.Session(config=config)
 input_image = tf.placeholder(dtype=tf.float32, shape=[None, image_size[1], image_size[0], 3])
 
 segmentation = Segmentator(
@@ -60,7 +60,7 @@ print('[Inferencing on video...]')
 
 def pipeline(image):
     #image_data = np.array(Image.open(image).resize(image_size, Image.ANTIALIAS)).astype(np.float32)
-    image_data = scipy.misc.imresize(image, [720, 1080])
+    image_data = scipy.misc.imresize(image, [image_size[1], image_size[0]])
 
     predictions = sess.run(
         predict_classes,

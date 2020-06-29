@@ -6,6 +6,7 @@ from network.lane_segmentator import Segmentator
 import numpy as np
 from PIL import Image
 from matplotlib import pyplot as plt
+import matplotlib.image as mpimg
 from utils.base_util import Timer, file_list
 import scipy.misc
 import time
@@ -22,10 +23,10 @@ flags.DEFINE_integer('num_gpu', 1,
                      'Number of GPUs to use.')
 
 model_dir = './model'
-image_size = (1080, 720)
+image_size = (540, 360)
 data_dir = './images'
 
-sess = tf.Session()
+sess = tf.Session(config=config)
 input_image = tf.placeholder(dtype=tf.float32, shape=[None, image_size[1], image_size[0], 3])
 
 segmentation = Segmentator(
@@ -59,9 +60,9 @@ sess.run(tf.global_variables_initializer())
 
 print('[Inferencing on image...]')
 
-image = cv2.imread('./images/image.png')
+image = cv2.imread('./images/image2.png')
 #image_data = np.array(Image.open(image).resize(image_size, Image.ANTIALIAS)).astype(np.float32)
-image_data = scipy.misc.imresize(image, [720, 1080])
+image_data = scipy.misc.imresize(image, [image_size[1], image_size[0]])
 image_data = cv2.cvtColor(image_data, cv2.COLOR_BGR2RGB)
 start = time.time()
 predictions = sess.run(

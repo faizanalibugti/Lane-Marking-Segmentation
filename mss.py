@@ -23,10 +23,10 @@ flags.DEFINE_integer('num_gpu', 1,
                      'Number of GPUs to use.')
 
 model_dir = './model'
-image_size = (1080, 720)
+image_size = (540, 360)
 data_dir = './images'
 
-sess = tf.Session()
+sess = tf.Session(config=config)
 input_image = tf.placeholder(dtype=tf.float32, shape=[None, image_size[1], image_size[0], 3])
 
 segmentation = Segmentator(
@@ -72,7 +72,7 @@ with mss.mss() as sct:
         screen = numpy.flip(screen[:, :, :3], 2)  
         screen = cv2.cvtColor(screen, cv2.COLOR_BGR2RGB)
 
-        image_data = scipy.misc.imresize(screen, [720, 1080])
+        image_data = scipy.misc.imresize(screen, [image_size[1], image_size[0]])
 
         predictions = sess.run(
             predict_classes,
