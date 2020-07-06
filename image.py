@@ -23,7 +23,7 @@ flags.DEFINE_integer('num_gpu', 1,
                      'Number of GPUs to use.')
 
 model_dir = './model'
-image_size = (540, 360)
+image_size = (500, 300)
 data_dir = './images'
 
 sess = tf.Session(config=config)
