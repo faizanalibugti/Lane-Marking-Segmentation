@@ -60,7 +60,7 @@ sess.run(tf.global_variables_initializer())
 
 print('[Inferencing on image...]')
 
-image = cv2.imread('./images/image2.png')
+image = cv2.imread('./images/2.png')
 #image_data = np.array(Image.open(image).resize(image_size, Image.ANTIALIAS)).astype(np.float32)
 image_data = scipy.misc.imresize(image, [image_size[1], image_size[0]])
 image_data = cv2.cvtColor(image_data, cv2.COLOR_BGR2RGB)
