@@ -26,7 +26,7 @@ model_dir = './model'
 image_size = (500, 300)
 data_dir = './images'
 
-sess = tf.Session()
+sess = tf.Session(config=config)
 input_image = tf.placeholder(dtype=tf.float32, shape=[None, image_size[1], image_size[0], 3])
 
 segmentation = Segmentator(
